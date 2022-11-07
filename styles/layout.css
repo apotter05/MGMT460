@@ -1,0 +1,42 @@
+/* Colors
+#8f0000 - dark red
+#660000 - darker red
+black
+
+*/
+.main {
+    display:flex;
+    flex-direction: column;
+}
+.menu {
+    width:100%;
+    background-color: black;
+}
+.content {
+    width:98%;
+    padding-top: 50pt;
+    padding-bottom: 50pt;
+    padding-left: 1%;
+    padding-right: 1%;
+    background-image: linear-gradient(black, #660000, #8f0000);
+}
+li {
+    display: inline-table;
+}
+li:after {
+    content: " |";
+    color: white;
+}
+li:before {
+    content: "| ";
+    color: white;
+}
+ul {
+    margin: 0;
+    padding-left: 1%;
+    padding-right: 1%;
+    text-align: right;
+}
+.white {
+    color: white;
+}
