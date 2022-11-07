@@ -2,6 +2,27 @@
 <html>
     <head>
         <title>codeEternal Media Database - Retrieve</title>
+        <script language="javascript">
+            window.addEventListener("load", readAll)
+            function readAll() {
+                fetch("http://localhost:7777/retrieve")
+                .then(response => response.json())
+                .then(records.innerHTML += `<table align="center">`)
+                .then(function(data) {
+                    //TODO: Make title and year link to retrieve-one page
+                    data.forEach(row => records.innerHTML += `
+                    <tr>
+                        <td> ${row.title} (${row.year}) </td>
+                        <td> Rating: ${row.rating} </td>
+                        <td> Runtime: ${row.runtime} </td>
+                        <td> Genre(s): ${row.genres} </td>
+                        <td> <a href="${row.website}" target="_blank">Website</a> </td>
+                    </tr><br>
+                    `) 
+                })
+                .then(records.innerHTML += `</table>`)
+            }
+        </script>
         <link rel="stylesheet" href="styles/layout.css">
         <link rel="stylesheet" href="styles/style.css">
     </head>
@@ -16,12 +37,9 @@
                 <li><a href="delete.html">Delete Movie</a></li>
             </ul>
         </div>
-        <div class="content center white">
-            Table to show movies movie<br>
-            Use multiple columns, movie poster as cell background?<br>
-            2nd page shows greater detail
-            <!-- https://www.w3schools.com/howto/howto_js_slideshow.asp -->
-            <br><br><a href="home.html"><button>Return Home</button></a>
+        <div id="records" class="content center white bgGradient"></div>
+        <div class="content center bgRed">
+            <a href="home.html"><button>Return Home</button></a>
         </div>
     </body>
 </html>
