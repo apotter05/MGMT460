@@ -25,7 +25,6 @@
             function readAll() {
                 fetch("http://localhost:7777/retrieve")
                 .then(response => response.json())
-                .then(records.innerHTML += `<table align="center">`)
                 .then(function(data) {
                     //TODO: Make arrow next to title and year link to retrieve-one page
                     var table = document.getElementById("records")
