@@ -4,23 +4,34 @@
         <title>codeEternal Media Database - Retrieve</title>
         <script language="javascript">
             window.addEventListener("load", readAll)
+
+            function addRow(row) {
+                var table = document.getElementById("records")
+                
+                var newRow = table.insertRow(-1)
+                var titleAndYear = newRow.insertCell(0)
+                var mpaa = newRow.insertCell(1)
+                var time = newRow.insertCell(2)
+                var type = newRow.insertCell(3)
+                var link = newRow.insertCell(4)
+
+                titleAndYear.innerHTML = `${row.title} (${row.year})`
+                mpaa.innerHTML = `${row.rating}`
+                time.innerHTML = `${row.runtime}`
+                type.innerHTML = `${row.genres}`
+                link.innerHTML = `<a href="${row.website}" target="_blank">Website</a>`
+            }
+
             function readAll() {
                 fetch("http://localhost:7777/retrieve")
                 .then(response => response.json())
                 .then(records.innerHTML += `<table align="center">`)
                 .then(function(data) {
                     //TODO: Make title and year link to retrieve-one page
-                    data.forEach(row => records.innerHTML += `
-                    <tr>
-                        <td> ${row.title} (${row.year}) </td>
-                        <td> Rating: ${row.rating} </td>
-                        <td> Runtime: ${row.runtime} </td>
-                        <td> Genre(s): ${row.genres} </td>
-                        <td> <a href="${row.website}" target="_blank">Website</a> </td>
-                    </tr><br>
-                    `) 
+                    var table = document.getElementById("records")
+                    table.style.borderSpacing="10px"
+                    data.forEach(addRow)
                 })
-                .then(records.innerHTML += `</table>`)
             }
         </script>
         <link rel="stylesheet" href="styles/layout.css">
@@ -37,8 +48,19 @@
                 <li><a href="delete.html">Delete Movie</a></li>
             </ul>
         </div>
-        <!-- TODO: Make records div an inner class,  -->
-        <div id="records" class="content center white bgGradient"></div>
+        <div class="content center white bgGradient">
+            <!-- TODO: Make records table different size, add background?  -->
+            <table id="records" class="content">
+                <tr>
+                    <!-- Add formatting to headings -->
+                    <td>Title</td>
+                    <td>Rating</td>
+                    <td>Runtime</td>
+                    <td>Genre(s)</td>
+                    <td>JustWatch Site</td>
+                </tr>
+            </table>
+        </div>
         <div class="content center bgRed">
             <a href="home.html"><button>Return Home</button></a>
         </div>
