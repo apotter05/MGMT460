@@ -2,8 +2,37 @@
 <html>
     <head>
         <title>codeEternal Media Database - Create</title>
+        <script language="javascript">
+            window.addEventListener("load", main)
+
+            function main() {
+                btn.addEventListener("click", sendData)
+            }
+
+            async function sendData() {
+                data = {
+                    title: title.value.trim(),
+                    year: year.value.trim(),
+                    genres: genres.value.trim(),
+                    rating: rating.value.trim(),
+                    runtime: runtime.value.trim(),
+                    website: website.value.trim()
+                }
+                url = "http://localhost:7777/create"
+
+                let response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data)
+                })
+                if (response.ok) {location.href="retrieve.html"}
+            }
+        </script>
         <link rel="stylesheet" href="styles/layout.css">
         <link rel="stylesheet" href="styles/style.css">
+        <link rel="stylesheet" href="styles/input.css">
     </head>
     <body>
         <div class="menu">
@@ -16,10 +45,48 @@
                 <li><a href="delete.html">Delete Movie</a></li>
             </ul>
         </div>
-        <div id="formAdd" class="content center white bgGradient"></div>
-        <div class="content center white bgRed">
-            Use form, center 60%?
-            <br><br><a href="home.html"><button>Return Home</button></a>
+        <div class="content center bgGradient">
+            <div class="form bgGrey">
+                <br>
+                <p class="title">Create A New Movie Entry</p>
+                <form><table align="center">
+                    <tr>
+                        <td>*Title:</td>
+                        <td style="width: 25pt"></td>
+                        <td align="left"><input id="title" required type="text" class="wide text"></td>
+                    </tr>
+                    <tr>
+                        <td>*Year:</td>
+                        <td></td>
+                        <td align="left"><input id="year" required type="text" class="narrow text"></td>
+                    </tr>
+                    <tr>
+                        <td>Genres:</td>
+                        <td></td>
+                        <td align="left"><input id="genres" type="text" class="wide text"></td>
+                    </tr>
+                    <tr>
+                        <td>Rating:</td>
+                        <td></td>
+                        <td align="left"><input id="rating" type="text" class="narrow text"></td>
+                    </tr>
+                    <tr>
+                        <td>Runtime:</td>
+                        <td></td>
+                        <td align="left"><input id="runtime" type="text" class="wide text" placeholder="#h ##min"></td>
+                    </tr>
+                    <tr>
+                        <td>*Website:</td>
+                        <td></td>
+                        <td align="left"><input id="website" required type="text" class="wide text"></td>
+                    </tr>
+                </table>
+                <br>
+                <input type="submit" id="btn" value="Create Movie Entry" class="center"><br><br></form>
+            </div>
+        </div>
+        <div class="content center bgRed">
+            <a href="home.html"><button>Return Home</button></a>
         </div>
     </body>
 </html>

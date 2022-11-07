@@ -35,3 +35,24 @@ app.get("/retrieve", function(req, res) {
     }
     run()
 })
+
+app.post("/create", function(req, res) {
+    async function run() {
+        try {
+            await client.connect()
+            record = {
+                title: req.body.title,
+                year: req.body.year,
+                genres: req.body.genres,
+                rating: req.body.rating,
+                runtime: req.body.runtime,
+                website: req.body.website
+            }
+            result = await movieTable.insertOne(record)
+            res.send(true)
+        } finally {
+            await client.close()
+        }
+    }
+    run()
+})
