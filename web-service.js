@@ -41,12 +41,12 @@ app.post("/create", function(req, res) {
         try {
             await client.connect()
             record = {
-                title: req.body.title,
-                year: req.body.year,
-                genres: req.body.genres,
-                rating: req.body.rating,
-                runtime: req.body.runtime,
-                website: req.body.website
+                title   : req.body.title,
+                year    : req.body.year,
+                genres  : req.body.genres,
+                rating  : req.body.rating,
+                runtime : req.body.runtime,
+                website : req.body.website
             }
             result = await movieTable.insertOne(record)
             res.send(true)
