@@ -10,6 +10,15 @@
     width:100%;
     background-color: black;
 }
+.links {
+    max-width: 360pt;
+    margin-left: auto;
+    margin-right: 10pt;
+    padding-top: 5pt;
+    padding-bottom: 5pt;
+    background-color: rgba(169, 169, 169, 0.8);
+    border-radius: 10px;
+}
 .content {
     width:98%;
     padding-top: 50pt;
