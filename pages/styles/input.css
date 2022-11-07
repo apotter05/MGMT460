@@ -1,0 +1,11 @@
+.text {
+    font-family: Georgia;
+    font-size: 10pt;
+    background-color: lightgrey;
+}
+.wide {
+    width: 250pt
+}
+.narrow {
+    width: 50pt
+}
