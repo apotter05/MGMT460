@@ -9,27 +9,27 @@
                 btn.addEventListener("click", sendData)
             }
 
-            async function sendData() {
+            function sendData() {
                 data = {
-                    title: title.value.trim(),
-                    year: year.value.trim(),
-                    genres: genres.value.trim(),
-                    rating: rating.value.trim(),
-                    runtime: runtime.value.trim(),
-                    website: website.value.trim()
+                    title   : title.value.trim(),
+                    year    : year.value.trim(),
+                    genres  : genres.value.trim(),
+                    rating  : rating.value.trim(),
+                    runtime : runtime.value.trim(),
+                    website : website.value.trim()
                 }
                 url = "http://localhost:7777/create"
 
-                let response = await fetch(url, {
+                fetch(url, {
                     method: 'POST',
                     headers: {
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify(data)
                 })
-                alert("test")
-                // if (response.ok) {location.href="retrieve.html"}
-                location.href="retrieve.html"
+                .then(response => response.json())
+                .then(x => window.location.href="retrieve.html")
+                alert("Movie added to database.")
             }
         </script>
         <link rel="stylesheet" href="styles/layout.css">
@@ -70,7 +70,16 @@
                     <tr>
                         <td>Rating:</td>
                         <td></td>
-                        <td align="left"><input id="rating" type="text" class="narrow text"></td>
+                        <td align="left">
+                            <select id="rating" class="narrow text">
+                                <option disabled hidden selected value=""></option>
+                                <option value="G">G</option>
+                                <option value="PG">PG</option>
+                                <option value="PG-13">PG-13</option>
+                                <option value="R">R</option>
+                                <option value="NC-17">NC-17</option>
+                            </select>
+                        </td>
                     </tr>
                     <tr>
                         <td>Runtime:</td>
