@@ -65,3 +65,14 @@ ul {
 .white {
     color: white;
 }
+.title {
+    font-family:'Lucida Sans', 
+        'Lucida Sans Regular', 
+        'Lucida Grande', 
+        'Lucida Sans Unicode', 
+        Geneva, 
+        Verdana, 
+        sans-serif;
+    font-size: 18pt;
+    text-decoration: underline;
+}
