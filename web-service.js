@@ -9,7 +9,7 @@ let app = express()
 let port = 7777
 
 const database = client.db('mediadb')
-const moveTable = database.collection('movies')
+const movieTable = database.collection('movies')
 
 app.use(express.static("pages"))
 app.use(express.json())
@@ -20,4 +20,18 @@ app.listen(port, function() {
 
 app.get("/", function(req, res) {
     res.sendFile(path.join(__dirname, "/pages/home.html"))
+})
+
+app.get("/retrieve", function(req, res) {
+    async function run() {
+        try {
+            await client.connect()
+            query = {}
+            rows = await movieTable.find(query)
+            res.send(JSON.stringify(await rows.toArray()))
+        } finally {
+            await client.close()
+        }
+    }
+    run()
 })
