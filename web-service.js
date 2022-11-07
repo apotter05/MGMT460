@@ -27,8 +27,36 @@ app.get("/retrieve", function(req, res) {
         try {
             await client.connect()
             query = {}
-            rows = await movieTable.find(query)
+            rows = await movieTable.find(query).sort({'title': 1})
             res.send(JSON.stringify(await rows.toArray()))
+        } finally {
+            await client.close()
+        }
+    }
+    run()
+})
+
+// app.get("/retrieve-one/:title", function(req, res) {
+//     async function run() {
+//         try {
+//             await client.connect()
+//             query = {title: req.params.title}
+//             row = await table.findOne(query)
+//             res.send(JSON.stringify(row))
+//         } finally {
+//             await client.close()
+//         }
+//     }
+//     run()
+// })
+
+app.get("/retrieve-one/:_id", function(req, res) {
+    async function run() {
+        try {
+            await client.connect()
+            query = {_id: req.params._id}
+            row = await table.findOne(query)
+            res.send(JSON.stringify(row))
         } finally {
             await client.close()
         }
@@ -49,7 +77,9 @@ app.post("/create", function(req, res) {
                 website : req.body.website
             }
             result = await movieTable.insertOne(record)
-            res.send(true)
+            // res.send(true)
+            redirect = {site: "retrieve.html"}
+            res.send(JSON.stringify(redirect))
         } finally {
             await client.close()
         }
