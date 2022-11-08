@@ -1,4 +1,8 @@
-let {MongoClient} = require("mongodb")
+/**
+ * Needs mongodb and express
+ * nmp install <package> --location=project
+ */
+let {MongoClient, ObjectId} = require("mongodb")
 let uri = "mongodb://localhost:27017"
 let client = new MongoClient(uri)
 
@@ -36,26 +40,12 @@ app.get("/retrieve", function(req, res) {
     run()
 })
 
-// app.get("/retrieve-one/:title", function(req, res) {
-//     async function run() {
-//         try {
-//             await client.connect()
-//             query = {title: req.params.title}
-//             row = await table.findOne(query)
-//             res.send(JSON.stringify(row))
-//         } finally {
-//             await client.close()
-//         }
-//     }
-//     run()
-// })
-
-app.get("/retrieve-one/:_id", function(req, res) {
+app.get("/retrieve-one/:id", function(req, res) {
     async function run() {
         try {
             await client.connect()
-            query = {_id: req.params._id}
-            row = await table.findOne(query)
+            query = {_id: new ObjectId(req.params.id)}
+            row = await movieTable.findOne(query)
             res.send(JSON.stringify(row))
         } finally {
             await client.close()
