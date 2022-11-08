@@ -2,6 +2,36 @@
 <html>
     <head>
         <title>codeEternal Media Database - Update</title>
+        <script language="javascript">
+            window.addEventListener("load", readAll)
+
+            function readAll() {
+                fetch("http://localhost:7777/retrieve")
+                .then(response => response.json())
+                .then(function(data) {
+                    var table = document.getElementById("records")
+                    table.style.borderSpacing="10px"
+                    data.forEach(addRow)
+                })
+            }
+
+            function addRow(row) {
+                var table = document.getElementById("records")
+                
+                var newRow = table.insertRow(-1)
+                var titleAndYear = newRow.insertCell(0)
+                var mpaa = newRow.insertCell(1)
+                var time = newRow.insertCell(2)
+                var type = newRow.insertCell(3)
+                var link = newRow.insertCell(4)
+
+                titleAndYear.innerHTML = `<a href=update-one.html?_id=${row._id}>${row.title} (${row.year})</a>`
+                mpaa.innerHTML = `${row.rating}`
+                time.innerHTML = `${row.runtime}`
+                type.innerHTML = `${row.genres}`
+                link.innerHTML = `<a href="${row.website}" target="_blank">Website</a>`
+            }
+        </script>
         <link rel="stylesheet" href="styles/layout.css">
         <link rel="stylesheet" href="styles/style.css">
     </head>
@@ -9,14 +39,26 @@
         <div class="menu">
             <img src="images/codeEternal_logo.png" class="logo">
             <ul class="links">
-                <li><a href="home.html">Home</a></li>
+                <li><a href=home.html>Home</a></li>
                 <li><a href="create.html">New Movie</a></li>
                 <li><a href="retrieve.html">View Records</a></li>
                 <li><a href="update.html">Update Record</a></li>
                 <li><a href="delete.html">Delete Movie</a></li>
             </ul>
         </div>
-        <div id="records" class="content center white bgGradient"></div>
+        <div class="content center bgGradient">
+            <div class="form bgGrey">
+                <table id="records" class="content">
+                    <tr>
+                        <th class="title">Title (select)</th>
+                        <th class="title">Rating</th>
+                        <th class="title">Runtime</th>
+                        <th class="title">Genre(s)</th>
+                        <th class="title">JustWatch Site</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
         <div class="content center white bgRed">
             2nd page to pull up/update actual info
             <br><br><a href="home.html"><button>Return Home</button></a>
