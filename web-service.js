@@ -54,7 +54,6 @@ app.post("/create", function(req, res) {
                 website : req.body.website
             }
             result = await movieTable.insertOne(record)
-            // res.send(true)
             redirect = {site: "retrieve.html"}
             res.send(JSON.stringify(redirect))
         } finally {
