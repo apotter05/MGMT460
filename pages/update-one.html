@@ -16,8 +16,6 @@
                 fetch("http://localhost:7777/retrieve-one/"+id)
                 .then(response => response.json())
                 .then(function(data) {
-                    alert(id)
-                    alert(data)
                     title.value = data.title
                     year.value = data.year
                     genres.value = data.genres
