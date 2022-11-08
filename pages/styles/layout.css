@@ -26,10 +26,14 @@
     color: whitesmoke
 }
 .form {
-    width: 60%;
+    margin-left: 100pt;
+    margin-right: 100pt;
     padding-left: 50pt;
     padding-right: 50pt;
     border-radius: 10px;
+}
+.narrowInput {
+    width: 40%
 }
 th {
     border-radius: 10px;
@@ -59,7 +63,7 @@ ul {
     background-image: linear-gradient(black, #660000, #8f0000);
 }
 .bgGrey {
-    background-color: rgba(169, 169, 169, .5);
+    background-color: rgba(169, 169, 169, .3);
     border-radius: 10px;
 }
 .white {
