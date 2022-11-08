@@ -100,3 +100,16 @@ app.put("/update", function(req, res) {
     }
     run()
 })
+
+app.delete("/delete/:id", function(req, res) {
+    async function run() {
+        try {
+            await client.connect()
+            query = {_id: new ObjectId(req.params.id)}
+            result = await movieTable.deleteOne(query)
+        } finally {
+            await client.close()
+        }
+    }
+    run()
+})
