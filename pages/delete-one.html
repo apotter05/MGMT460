@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script language="javascript">
+            window.addEventListener("load", deleteOne)
+
+            function deleteOne() {
+                params = (new URL(document.location)).searchParams
+                id = params.get("_id")
+                fetch("http://localhost:7777/delete/"+id, {method: 'DELETE'})
+                .then(response => response.json())
+                .then (x => window.location.href="retrieve.html")
+            }
+        </script>
+    </head>
+</html>

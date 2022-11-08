@@ -107,6 +107,8 @@ app.delete("/delete/:id", function(req, res) {
             await client.connect()
             query = {_id: new ObjectId(req.params.id)}
             result = await movieTable.deleteOne(query)
+            redirect = {site: "retrieve.html"}
+            res.send(JSON.stringify(redirect))
         } finally {
             await client.close()
         }
