@@ -8,6 +8,7 @@ let client = new MongoClient(uri)
 
 let express = require("express")
 let path = require("path")
+const { table } = require("console")
 
 let app = express()
 let port = 7777
@@ -40,20 +41,6 @@ app.get("/retrieve", function(req, res) {
     run()
 })
 
-app.get("/retrieve-one/:id", function(req, res) {
-    async function run() {
-        try {
-            await client.connect()
-            query = {_id: new ObjectId(req.params.id)}
-            row = await movieTable.findOne(query)
-            res.send(JSON.stringify(row))
-        } finally {
-            await client.close()
-        }
-    }
-    run()
-})
-
 app.post("/create", function(req, res) {
     async function run() {
         try {
@@ -68,6 +55,43 @@ app.post("/create", function(req, res) {
             }
             result = await movieTable.insertOne(record)
             // res.send(true)
+            redirect = {site: "retrieve.html"}
+            res.send(JSON.stringify(redirect))
+        } finally {
+            await client.close()
+        }
+    }
+    run()
+})
+
+app.get("/retrieve-one/:id", function(req, res) {
+    async function run() {
+        try {
+            await client.connect()
+            query = {_id: new ObjectId(req.params.id)}
+            row = await movieTable.findOne(query)
+            res.send(JSON.stringify(row))
+        } finally {
+            await client.close()
+        }
+    }
+    run()
+})
+
+app.put("/update", function(req, res) {
+    async function run() {
+        try {
+            await client.connect()
+            where = {_id: new ObjectId(req.body.id)}
+            changes = {$set:{
+                title   : req.body.title,
+                year    : req.body.year,
+                genres  : req.body.genres,
+                rating  : req.body.rating,
+                runtime : req.body.runtime,
+                website : req.body.website
+            }}
+            result = await movieTable.updateOne(where, changes)
             redirect = {site: "retrieve.html"}
             res.send(JSON.stringify(redirect))
         } finally {

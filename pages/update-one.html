@@ -24,6 +24,29 @@
                     website.value = data.website
                 })
             }
+
+            function writeOne() {
+                params = (new URL(document.location)).searchParams
+                data = {
+                    id      : params.get("_id"),
+                    title   : title.value,
+                    year    : year.value,
+                    genres  : genres.value,
+                    rating  : rating.value,
+                    runtime : runtime.value,
+                    website : website.value
+                }
+                url = "http://localhost:7777/update"
+                fetch(url, {
+                    method: 'PUT',
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(x => window.location.href="retrieve.html")
+
+                alert("Movie information updated.")
+            }
         </script>
         <link rel="stylesheet" href="styles/layout.css">
         <link rel="stylesheet" href="styles/style.css">
