@@ -5,6 +5,17 @@
         <script language="javascript">
             window.addEventListener("load", readAll)
 
+            function readAll() {
+                fetch("http://localhost:7777/retrieve")
+                .then(response => response.json())
+                .then(function(data) {
+                    //TODO: Make arrow next to title and year link to retrieve-one page
+                    var table = document.getElementById("records")
+                    table.style.borderSpacing="10px"
+                    data.forEach(addRow)
+                })
+            }
+
             function addRow(row) {
                 var table = document.getElementById("records")
                 
@@ -20,17 +31,6 @@
                 time.innerHTML = `${row.runtime}`
                 type.innerHTML = `${row.genres}`
                 link.innerHTML = `<a href="${row.website}" target="_blank">Website</a>`
-            }
-
-            function readAll() {
-                fetch("http://localhost:7777/retrieve")
-                .then(response => response.json())
-                .then(function(data) {
-                    //TODO: Make arrow next to title and year link to retrieve-one page
-                    var table = document.getElementById("records")
-                    table.style.borderSpacing="10px"
-                    data.forEach(addRow)
-                })
             }
         </script>
         <link rel="stylesheet" href="styles/layout.css">
