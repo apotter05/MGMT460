@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>codeEternal Media Database - Update</title>
+        <script language="javascript">
+            window.addEventListener("load", main)
+
+            function main() {
+                readOne()
+                btn.addEventListener("click", writeOne)
+            }
+
+            function readOne() {
+                params = (new URL(document.location)).searchParams
+                id = params.get("_id")
+                fetch("http://localhost:7777/retrieve-one/"+id)
+                .then(response => response.json())
+                .then(function(data) {
+                    alert(id)
+                    alert(data)
+                    title.value = data.title
+                    year.value = data.year
+                    genres.value = data.genres
+                    rating.value = data.rating
+                    runtime.value = data.runtime
+                    website.value = data.website
+                })
+            }
+        </script>
+        <link rel="stylesheet" href="styles/layout.css">
+        <link rel="stylesheet" href="styles/style.css">
+        <link rel="stylesheet" href="styles/input.css">
+    </head>
+    <body>
+        <div class="menu">
+            <img src="images/codeEternal_logo.png" class="logo">
+            <ul class="links">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="create.html">New Movie</a></li>
+                <li><a href="retrieve.html">View Records</a></li>
+                <li><a href="update.html">Update Record</a></li>
+                <li><a href="delete.html">Delete Movie</a></li>
+            </ul>
+        </div>
+        <div class="content center bgGradient">
+            <div class="form bgGrey">
+                <br>
+                <p class="title">Update The Movie Entry</p>
+                <form><table align="center">
+                    <tr>
+                        <td>*Title:</td>
+                        <td style="width: 25pt"></td>
+                        <td align="left"><input id="title" required type="text" class="wide text"></td>
+                    </tr>
+                    <tr>
+                        <td>Year:</td>
+                        <td></td>
+                        <td align="left"><input id="year" type="text" class="narrow text"></td>
+                    </tr>
+                    <tr>
+                        <td>Genre(s):</td>
+                        <td></td>
+                        <td align="left"><input id="genres" type="text" class="wide text"></td>
+                    </tr>
+                    <tr>
+                        <td>Rating:</td>
+                        <td></td>
+                        <td align="left">
+                            <select id="rating" class="narrow text">
+                                <option value="G">G</option>
+                                <option value="PG">PG</option>
+                                <option value="PG-13">PG-13</option>
+                                <option value="R">R</option>
+                                <option value="NC-17">NC-17</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Runtime:</td>
+                        <td></td>
+                        <td align="left"><input id="runtime" type="text" class="wide text"></td>
+                    </tr>
+                    <tr>
+                        <td>*Website:</td>
+                        <td></td>
+                        <td align="left"><input id="website" required type="text" class="wide text"></td>
+                    </tr>
+                </table>
+                <br>
+                <input type="submit" id="btn" value="Update Movie Entry" class="center"><br><br>
+                </form>
+            </div>
+        </div>
+        <div class="content center bgRed">
+            <a href="home.html"><button>Return Home</button></a>
+        </div>
+    </body>
+</html>
