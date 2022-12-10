@@ -4,6 +4,37 @@
         <title>codeEternal Media Database - Home</title>
         <link rel="stylesheet" href="styles/layout.css">
         <link rel="stylesheet" href="styles/style.css">
+        <link rel="stylesheet" href="styles/slideshow.css">
+        <script language="javascript">
+            let slideIndex = 1;
+            showSlides(slideIndex);
+
+            // Next/previous controls
+            function plusSlides(n) {
+                showSlides(slideIndex += n);
+            }
+
+            // Thumbnail image controls
+            function currentSlide(n) {
+                showSlides(slideIndex = n);
+            }
+
+            function showSlides(n) {
+                let i;
+                let slides = document.getElementsByClassName("mySlides");
+                let dots = document.getElementsByClassName("dot");
+                if (n > slides.length) {slideIndex = 1}
+                if (n < 1) {slideIndex = slides.length}
+                for (i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";
+                }
+                for (i = 0; i < dots.length; i++) {
+                    dots[i].className = dots[i].className.replace(" active", "");
+                }
+                slides[slideIndex-1].style.display = "block";
+                dots[slideIndex-1].className += " active";
+            } 
+        </script>
     </head>
     <body>
         <div class="menu">
@@ -17,11 +48,35 @@
             </ul>
         </div>
         <div class="content center white bgGradient">
-            <br><br><br><br><br><br><br><br><br><br><br><br>
-            Add Slideshow<br>
-            Quick access buttons below.
             <!-- https://www.w3schools.com/howto/howto_js_slideshow.asp -->
-            <br><br><br><br><br><br><br><br><br><br><br><br>
+            <div class="slideshow-container">
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                <div class="mySlides fade">
+                    <img src="images/c1.jpg" style="width:40%" href="create.html">
+                    <div class="text bgWhite"><a href="create.html">Create A Movie</a></div>
+                </div>
+                <div class="mySlides fade">
+                    <img src="images/r1.jpg" style="width:40%">
+                    <div class="text bgWhite"><a href="retrieve.html">Retrieve Movies</a></div>
+                </div>
+                <div class="mySlides fade">
+                    <img src="images/u1.jpg" style="width:40%">
+                    <div class="text bgWhite"><a href="update.html">Update A Movie</a></div>
+                </div>
+                <div class="mySlides fade">
+                    <img src="images/d1.jpg" style="width:40%">
+                    <div class="text bgWhite"><a href="delete.html">Delete A Movie</a></div>
+                </div>
+                
+            </div>
+            <br>
+            <div style="text-align:center">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+                <span class="dot" onclick="currentSlide(4)"></span>
+            </div>
         </div>
     </body>
 </html>
