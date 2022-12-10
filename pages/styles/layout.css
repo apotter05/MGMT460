@@ -11,7 +11,8 @@
     background-color: black;
 }
 .links {
-    max-width: 360pt;
+    max-width: 480pt;
+    min-width: 480pt;
     margin-left: auto;
     margin-right: 10pt;
     padding-top: 5pt;
